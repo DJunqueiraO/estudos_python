@@ -1,19 +1,5 @@
 from options import Options
-
-class Question:
-
-    last_answer = False
-
-    def __init__(self, text: str, correct_answer: str, options: Options):
-        self.text = text
-        self.correct_answer = correct_answer
-        self.options = options
-
-    def __str__(self) -> str:
-        return f"{self.text}"
-    
-    def set_answer(self, guess: str):
-        self.last_answer = self.correct_answer == guess.upper()
+from question import Question
 
 QUESTION_1_OPTIONS = Options("Monty Python", "Guido van Rossum", "Rasmus Lerdorf", "Mark Pilgrim")
 QUESTION_1 = Question("Who created Python? ", "B", QUESTION_1_OPTIONS)
@@ -36,11 +22,24 @@ class Questions(list[Question]):
         self.append(QUESTION_3)
         self.append(QUESTION_4)
 
-    def get_correct_answers(self) -> list[str]:
-        correct_answers = []
+    def get_answers(self) -> list[str]:
+        answers = []
         for question in self:
-            if question.last_answer:
-                correct_answers.append(question.correct_answer)
-            
-        return correct_answers
+            answers.append(question.correct_answer)
+
+        return answers
     
+    def get_correct_guesses(self) -> list[str]:
+        correct_guesses = []
+        for question in self:
+            if question.get_last_answer():
+                correct_guesses.append(question.correct_answer)
+            
+        return correct_guesses
+    
+    def get_guesses(self):
+        guesses = []
+        for question in self:
+            guesses.append(question.guess)
+        
+        return guesses

@@ -3,7 +3,7 @@ from functools import reduce
 
 class Displayer:
 
-    __guesses__ = None
+    # __answers__ = None
     questions = None
 
     def __init__(self, questions: Questions):
@@ -12,19 +12,22 @@ class Displayer:
     def print_line(self):
         print("----------------------------------------")
 
-    def get_guesses(self) -> list[str]:
-        if self.__guesses__ == None:
-            self.__guesses__ = list(map(lambda question: question.correct_answer, self.questions))
-        return self.__guesses__
+    # def get_answers(self) -> list[str]:
+    #     if self.__answers__ == None:
+    #         self.__answers__ = list(map(lambda question: question.correct_answer, self.questions))
+    #     return self.__answers__
     
-    def show_scorre(self, guesses: list[str]):
+    def show_scorre(self):
         self.print_line()
         print("RESULTS")
         print()
-        print(f"Answers: {reduce(lambda a, b: a + " " + b, self.get_guesses())}")
-        print(f"Guesses: {reduce(lambda a, b: a + " " + b, guesses)}")
+        print(f"Answers: {reduce(lambda a, b: a + " " + b, self.questions.get_answers())}")
+        print(f"Guesses: {reduce(lambda a, b: a + " " + b, self.questions.get_guesses())}")
         print()
-        correct_answers = self.questions.get_correct_answers()
+
+        correct_answers = self.questions.get_correct_guesses()
         score = int(len(correct_answers)/len(self.questions)*100)
+
         print(f"Your score is {score}%")
+        
         self.print_line()
