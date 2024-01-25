@@ -1,0 +1,2 @@
+class Vehicle:
+    color = None
