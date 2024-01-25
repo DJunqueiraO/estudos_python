@@ -1,4 +1,3 @@
-import os
 import shutil
 
 folder_path = 'c:/workspaceVSC/Estudos_Python/_36_delete_file/target'
@@ -13,5 +12,3 @@ except OSError as e:
     print('The folder is not empty!')
 else:
     print('The folder was deleted!')
-    
-    
