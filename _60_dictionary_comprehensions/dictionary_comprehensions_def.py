@@ -5,7 +5,12 @@ cities_in_F = {'New York': 32,
                'Chicago': 50}
 
 def check(temp: int):
-    return 'WARM' if temp >= 40 else 'COLD'
+    if temp >= 70:
+        return 'HOT'
+    elif temp >= 40:
+        return 'WARM'
+    else:
+        return 'COLD'
 
 desc_cities = {key: check(temp=value) for (key, value) in cities_in_F.items()}
 
