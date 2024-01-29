@@ -1,0 +1,1 @@
+# path/to/pyinstaller.exe -F -w -i _97_compile/icon.ico _97_compile/clock.py
