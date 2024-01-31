@@ -14,9 +14,3 @@ class FontBox(OptionMenu):
             *font.families(), 
             command=lambda _: text_editor.change_font()
         )
-
-# master: Misc | None,
-# variable: StringVar,
-# value: str,
-# *values: str,
-# command: ((StringVar) -> object) | None = ...
