@@ -6,7 +6,7 @@ GAME_HEIGHT = 500
 SPEED = 200
 
 SPACE_SIZE = 50
-BODY_PARTS = 3
+BODY_PARTS = 2
 SNAKE_COLOR = "#00ff00"
 FOOD_COLOR = "#ff0000"
 BACKGROUND_COLOR = "#000000"
@@ -116,21 +116,26 @@ def change_direction(event: Event):
 def check_collisions(snake: Snake):
     x, y = snake.coordinates[0]
 
-    if x >= GAME_WIDTH - SPACE_SIZE:
-        snake.coordinates[0] = - SPACE_SIZE, y
-    elif x < 0:
-        snake.coordinates[0] = GAME_WIDTH, y
-    elif y < 0:
-        snake.coordinates[0] = x, GAME_HEIGHT
-    elif y >= GAME_HEIGHT - SPACE_SIZE:
-        snake.coordinates[0] = x, - SPACE_SIZE
+    if x < 0 or x >= GAME_WIDTH:
+        return True
+    elif y < 0 or y >= GAME_HEIGHT:
+        return True
 
     for body_part in snake.coordinates[1:]:
         if x == body_part[0] and y == body_part[1]:
             return True
+    return False
 
 def game_over():
-    label.configure(text="Game over!")
+    canvas.delete(ALL)
+    canvas.create_text(
+        canvas.winfo_width()/2,
+        canvas.winfo_height()/2,
+        font=("consolas", 70),
+        text="GAME OVER",
+        fill="red",
+        tag="gameover"
+    )
 
 window = Tk()
 window.title("Python Game")
