@@ -1,4 +1,4 @@
-h = 4
+h = int(input('Insert triangle height: '))
 
 for i in range(h):
   row = list(map(lambda _: ' ', range(h + 1)))
@@ -8,5 +8,3 @@ for i in range(h):
   if i == len(row) - 2:
     row = '_'.join(row.split(' '))
   print(row)
-
-
