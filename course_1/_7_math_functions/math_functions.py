@@ -2,11 +2,11 @@ import math
 
 pi = math.pi
 
-# print(math.ceil(pi))
-# print(round(pi))
-# print(abs(-pi))
-# print(pow(-pi, 2))
-# print(math.sqrt(pi))
+print(math.ceil(pi))
+print(round(pi))
+print(abs(-pi))
+print(pow(-pi, 2))
+print(math.sqrt(pi))
 
 
 a = 1

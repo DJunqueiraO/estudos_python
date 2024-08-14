@@ -1,7 +1,5 @@
 age = (
-    int(
-        input("How old are you? ")
-    )
+    int(input("How old are you? "))
 )
 
 if age == 100:
