@@ -24,8 +24,11 @@ class CalculatorLines(list):
   def get_controls(self):
     def command(text):
       self.entry.insert(len(self.entry.get()), text)
-    controls =  dict(map(lambda a: (a, lambda: command(a)), reduce(lambda a, b: a + b, self)))
-
+    controls =  dict(map(
+      lambda a: (a, lambda: command(a)), 
+      reduce(lambda a, b: a + b, self)
+    ))
+    
     def c():
       self.entry.delete(0, len(self.entry.get()))
     controls['C'] = c
