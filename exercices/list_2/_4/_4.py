@@ -7,4 +7,5 @@ from tkinter import *
 from functools import reduce
 from CalculatorTk import CalculatorTk
 
-CalculatorTk().mainloop()
+if __name__ == "__main__":
+  CalculatorTk().mainloop()
