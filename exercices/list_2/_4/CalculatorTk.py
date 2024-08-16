@@ -46,5 +46,3 @@ class CalculatorTk(Tk):
         )
         relwidth = 1/len(self.lines[line_index])
         button.place(relheight=1, relwidth=relwidth, relx=column_index*relwidth)
-
-CalculatorTk().mainloop()
