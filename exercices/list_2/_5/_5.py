@@ -3,14 +3,7 @@
 # (red, green, blue) que alteram a cor de fundo de um painel (frame) de acordo com os valores dos sliders. 
 
 from tkinter import Tk, Frame, Scale
-
-
-class ColorFrame(Frame):
-  def __init__(self, master):
-    super().__init__(master)
-
-  def configure_background(self, rgb):
-    color_frame.configure(background='#%02x%02x%02x' % tuple(rgb))
+from ColorFrame import ColorFrame
 
 
 tk = Tk()
