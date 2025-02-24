@@ -101,5 +101,11 @@ def reverse(s: str):
 
 # Exercício 10 - Produto de Dois Números Usando Soma Recursiva
 # Implemente uma função recursiva que multiplique dois números inteiros usando apenas somas.
-def multiplicacao(a, b):
-    pass
+def multiplica(a, b):
+    def multiplica_recurs(a, r, b):
+        if b == 1:
+            return a
+        return r + multiplica_recurs(a, r, b-1)
+    return multiplica_recurs(a, a, b)
+
+print(multiplica(3, 3))

@@ -10,21 +10,25 @@ class BinaryTreeNode:
         right = self.right if self.right is not None else 'null'
         return f'{{"value": {value}, "left": {left}, "right": {right}}}'
 
+    def get_next_direction(self, value):
+        return 'left' if value < self.value else 'right'
+
+    def get_next(self, value):
+        return getattr(self, self.get_next_direction(value))
+
+    def set_next(self, value):
+        setattr(self, self.get_next_direction(value), BinaryTreeNode(value))
+
+
 class BinaryTree:
     def __init__(self):
         self.root: BinaryTreeNode | None = None
 
     def _appending(self, node, value):
-        if value < node.value:
-            if not node.left:
-                node.left = BinaryTreeNode(value)
-            else:
-                self._appending(node.left, value)
+        if not node.get_next(value):
+            node.set_next(value)
         else:
-            if not node.right:
-                node.right = BinaryTreeNode(value)
-            else:
-                self._appending(node.right, value)
+            self._appending(node.get_next(value), value)
 
     def append(self, value):
         if not self.root:
@@ -33,11 +37,11 @@ class BinaryTree:
             self._appending(self.root, value)
 
     def _deleting(self, node: BinaryTreeNode, value):
-        if value < node.value:
-            node.left = self._deleting(node.left, value)
-        elif value > node.value:
-            node.right = self._deleting(node.right, value)
-        else:
+        if not node:
+            return None
+
+        direction = node.get_next_direction(value)
+        if value == node.value:
             if not node.left and not node.right:
                 return None
             elif not node.left:
@@ -50,29 +54,24 @@ class BinaryTree:
                     successor = successor.left
                 node.value = successor.value
                 node.right = self._deleting(node.right, successor.value)
+        else:
+            setattr(node, direction, self._deleting(node.get_next(value), value))
 
         return node
 
     def delete(self, value):
-        if not self.root:
-            return
-        else:
+        if self.root:
             self.root = self._deleting(self.root, value)
 
     def search(self, value):
         node = self.root
         while node:
-            if value < node.value:
-                node = node.left
-            elif value > node.value:
-                node = node.right
-            else:
+            if value == node.value:
                 return True
+            node = node.get_next(value)
         return False
 
     def __str__(self):
-        if not self.root:
-            return "Árvore vazia"
         return str(self.root)
 
 
@@ -93,6 +92,8 @@ binary_tree.append(9)
 binary_tree.append(11)
 binary_tree.append(13)
 binary_tree.append(15)
+
+binary_tree.delete(15)
 
 
 # print(binary_tree.search(22))
